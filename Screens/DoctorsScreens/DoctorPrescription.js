@@ -16,6 +16,7 @@ import TaskItem from "../../Components/DoctorComponents/TaskItem";
 import TaskInputField from "../../Components/DoctorComponents/TaskInputField";
 import { COLORS } from "../../assets/constants";
 import axios from "axios";
+import Prescription from "../Prescription";
 const DoctorPrescription = ({ navigation, route }) => {
   const [patient, setPatient] = useState([]);
   const [p_isLoading, p_setLoading] = useState(false);
@@ -152,7 +153,10 @@ const DoctorPrescription = ({ navigation, route }) => {
               .catch((error) => console.error(error))
               .finally(() => setLoading(false));
 
+              alert('Prescription was sent')
+              navigation.navigate('Doctor Appointments')
             }}
+            
           >
             <Text>save</Text>
           </TouchableOpacity>

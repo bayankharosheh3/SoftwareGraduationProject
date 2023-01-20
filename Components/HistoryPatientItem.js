@@ -17,7 +17,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { RoutingData } from "../Components/Context/RoutingDataProvider";
 
-const HistoryPatientItem = ({ item, navigation,route }) => {
+const HistoryPatientItem = ({ item, navigation, route, setData, setId }) => {
   const { width } = useWindowDimensions();
   const [clicked, setClicked] = useState(false);
   const [clicked2, setClicked2] = useState(false);
@@ -79,18 +79,17 @@ const HistoryPatientItem = ({ item, navigation,route }) => {
             setClicked2(true);
             if (item.id == "4") {
               var Data = {
-                p_id:dataSignIn.userId,
-              }
+                p_id: dataSignIn.userId,
+              };
 
               axios
-              .post("http://10.0.2.2:80/backend/doctor/smoke.php", Data)
-              .then((response) => response.data)
-              .then((json) =>{ 
-                console.log(json)
-              }
-              )
-              .catch((error) => console.error(error))
-              .finally(() => setLoading(false));
+                .post("http://10.0.2.2:80/backend/doctor/smoke.php", Data)
+                .then((response) => response.data)
+                .then((json) => {
+                  console.log(json);
+                })
+                .catch((error) => console.error(error))
+                .finally(() => setLoading(false));
 
               setYes(false);
             } else {
@@ -133,26 +132,9 @@ const HistoryPatientItem = ({ item, navigation,route }) => {
               }}
               onPress={() => {
                 setAnswers([...answers, { id: id.current++, answer: value }]);
-
-                var Data = {
-                  value:answers,
-                  p_id:dataSignIn.userId,
-                  q_id:item.id,
-                }
-
-                axios
-                .post("http://10.0.2.2:80/backend/doctor/add_value.php", Data)
-                .then((response) => response.data)
-                .then((json) =>{ 
-                  console.log(json)
-                }
-                )
-                .catch((error) => console.error(error))
-                .finally(() => setLoading(false));
-                
-                console.log(item.id);
-                setValue('');
-                
+                setData([...answers, { id: id.current++, answer: value }]);
+                setId(item.id);
+                setValue("");
               }}
             >
               <Text style={{ fontSize: 30, color: COLORS.Main }}>+</Text>

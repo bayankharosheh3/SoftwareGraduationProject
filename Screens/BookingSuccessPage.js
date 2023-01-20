@@ -33,26 +33,26 @@ const BookingSuccessPage = ({ route, navigation }) => {
   }, []);
 
   return (
-    <View style={styles.mainContainer}>
-      <Image
-        source={require("../assets/images/bookingsucessfuly.jpg")}
-        style={styles.imgSuccess}
-      />
-      <Text style={styles.title}>Booking Successful</Text>
-      <Text style={styles.desc}>
-        Your booking has been Successful, the reminder is set automatically
-      </Text>
-      <TouchableOpacity>
-        <Text style={styles.details}>View Details</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.gotBtn}
-        onPress={() => {
-          navigation.navigate("home");
-        }}
-      >
-        <Text style={styles.got}>GOT IT</Text>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.mainContainer}>
+        <Image
+          source={require("../assets/images/bookingsucessfuly.jpg")}
+          style={styles.imgSuccess}
+        />
+        <Text style={styles.title}>Booking Successful</Text>
+        <Text style={styles.desc}>
+          Your booking has been Successful, confirm your booking by
+          <Text style={styles.details}> click on GOT IT </Text>
+        </Text>
+        <TouchableOpacity
+          style={styles.gotBtn}
+          onPress={() => {
+            navigation.navigate("home");
+          }}
+        >
+          <Text style={styles.got}>GOT IT</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     width: "80%",
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: 120,
   },
   details: {
     color: COLORS.Main,
@@ -99,5 +99,11 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     textAlign: "center",
     fontSize: 16,
+  },
+  container: {
+    backgroundColor: "white",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

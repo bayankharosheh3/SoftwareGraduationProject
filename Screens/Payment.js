@@ -11,32 +11,28 @@ import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { useState } from "react";
 import visa from "./../assets/images/visa.png";
 import cash from "./../assets/images/cash.png";
+
+import Visa from "../Components/Visa";
 const Bill = ({ navigation, route }) => {
+  const [tasks, setTasks] = useState([]);
+  const addTask = (task) => {
+    if (task == null) return;
+    setTasks([...tasks, task]);
+    Keyboard.dismiss();
+  };
+  const deleteTask = (deleteIndex) => {
+    setTasks(tasks.filter((value, index) => index != deleteIndex));
+  };
+  const [show, setShow] = useState("none");
+
+  const [move, setMove] = useState(false);
+
   console.log(route.params.doctorId);
   console.log(route.params.appId);
-  
+
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.firstRow}>
-        <View style={styles.topContainer}>
-          <View style={styles.titleIcons}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Notifications")}
-            >
-              <FontAwesome5Icons name="arrow-left" style={styles.titleIcon} />
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.title}>Payment</Text>
-
-          <View style={styles.titleIcons}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Notifications")}
-            >
-              <FontAwesome5Icons name="times" style={styles.titleIcon} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+      <View style={styles.firstRow}></View>
       <View style={styles.secondRow}></View>
       <View style={styles.column}>
         <View style={styles.info}>
@@ -58,10 +54,6 @@ const Bill = ({ navigation, route }) => {
           <Text style={styles.graytext}>consultation</Text>
           <Text style={styles.paymentdetail}>$10</Text>
         </View>
-        <View style={styles.tabs}>
-          <Text style={styles.graytext}>consultation</Text>
-          <Text style={styles.paymentdetail}>$10</Text>
-        </View>
         <View style={styles.date}>
           <View style={styles.profileText}>
             <Text style={styles.age}>Date</Text>
@@ -79,13 +71,14 @@ const Bill = ({ navigation, route }) => {
         <TouchableOpacity
           style={styles.paymentbutton}
           activeOpacity={0.5}
-          onPress={() =>
-            navigation.navigate("BookingSuccess", {
-              payment: 1,
-              appId: route.params.appId,
-              doctorId: route.params.doctorId,
-            })
-          }
+          onPress={() => {
+            setShow("flex");
+            // navigation.navigate("BookingSuccess", {
+            //   payment: 1,
+            //   appId: route.params.appId,
+            //   doctorId: route.params.doctorId,
+            // })
+          }}
         >
           <Image source={visa} style={styles.visaimg} />
         </TouchableOpacity>
@@ -104,6 +97,21 @@ const Bill = ({ navigation, route }) => {
         >
           <Image source={cash} style={styles.cashimg} />
         </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          display: show,
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+        }}
+      >
+        <Visa
+          fun={setShow}
+          setMove={setMove}
+          navigation={navigation}
+          route={route}
+        />
       </View>
     </View>
   );
@@ -143,7 +151,7 @@ const styles = StyleSheet.create({
     // backgroundColor: COLORS.white,
   },
   topContainer: {
-    marginTop: 60,
+    marginTop: 40,
     width: "90%",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -163,10 +171,10 @@ const styles = StyleSheet.create({
     color: "white",
   },
   column: {
-    marginTop: 120,
+    marginTop: 60,
     position: "absolute",
     width: "90%",
-    height: "80%",
+    height: "90%",
     backgroundColor: "#fff",
     borderRadius: 10,
     alignItems: "center",

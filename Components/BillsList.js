@@ -47,6 +47,11 @@ const BillsList = ({ searchPhrase, setCLicked, data, navigation }) => {
                       <Text style={styles.textPaid}>Not Paid</Text>
                     </View>
                   )}
+                   {item.paid == 1 && (
+                    <View style={styles.paid}>
+                      <Text style={styles.textPaid}>Paid</Text>
+                    </View>
+                  )}
                 </View>
               </View>
             </View>
@@ -191,6 +196,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingVertical: 2,
     borderRadius: 5,
+
   },
   userImgWrapper: {
     paddingTop: 15,
@@ -223,15 +229,16 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: "#7BC89C",
     fontWeight: "bold",
-    // fontFamily: "Lato-Regular",
-    paddingRight: 10,
+    textAlign:'center',
+    paddingHorizontal: 8,
+
   },
   specialty: {
     fontSize: 14,
     color: "#949494",
   },
   rateimage: {
-    width: 17,
+    width: 20,
     height: 17,
   },
   arrowimg: {
@@ -243,8 +250,17 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     padding: 2,
     paddingHorizontal: 8,
+    width: 80,
+  },
+  paid: {
+    backgroundColor: "green",
+    borderRadius: 3,
+    padding: 2,
+    paddingHorizontal: 8,
+    width: 80,
   },
   textPaid: {
     color: COLORS.FontColorWithBackground,
+    textAlign:'center',
   },
 });

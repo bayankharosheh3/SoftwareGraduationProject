@@ -52,7 +52,7 @@ const DoctorProfile = ({ route, navigation }) => {
 
           <View style={styles.titleIcons}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Notifications")}
+              onPress={() => navigation.navigate("Announcements")}
             >
               <FontAwesome5Icons name="bell" style={styles.titleIcon} />
             </TouchableOpacity>

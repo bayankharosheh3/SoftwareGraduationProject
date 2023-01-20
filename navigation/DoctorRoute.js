@@ -64,7 +64,7 @@ const DoctorRoute = () => {
         // options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Notifications"
+        name="Announcements"
         component={DoctorNotifications}
         // options={{ headerShown: false }}
       />

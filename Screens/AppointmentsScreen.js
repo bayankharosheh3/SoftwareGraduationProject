@@ -16,6 +16,7 @@ import { MyTabs } from "../navigation/AppointmentsTabs";
 import { RoutingData } from "../Components/Context/RoutingDataProvider";
 
 import axios from "axios";
+import { COLORS } from "../assets/constants";
 export function Upcoming({ route, navigation }) {
   const dataSignIn = useContext(RoutingData);
   const [isLoading, setLoading] = useState(false);
@@ -44,14 +45,7 @@ export function Upcoming({ route, navigation }) {
         data={users}
         keyExtractor={(item) => item.app_id}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.card}
-            onPress={() =>
-              navigation.navigate("doctor_appointments", {
-                userName: item.dr_name,
-              })
-            }
-          >
+          <View style={styles.card}>
             <View style={styles.userInfo}>
               <View style={styles.userImgWrapper}>
                 <Image style={styles.userImg} source={{ uri: item.image }} />
@@ -72,14 +66,17 @@ export function Upcoming({ route, navigation }) {
                     <Text style={styles.time}>{item.app_date}</Text>
                   </View>
                   <TouchableOpacity
-                    style={styles.chatimg}
+                    style={styles.btn}
                     onPress={() => {
                       var Data1 = {
                         id: item.app_id,
                         p_id: dataSignIn.userId,
                       };
                       axios
-                        .post("http://10.0.2.2:80/backend/cancel_app.php", Data1)
+                        .post(
+                          "http://10.0.2.2:80/backend/cancel_app.php",
+                          Data1
+                        )
                         .then((response) => response.data)
                         .then((json) => {
                           //setUsers(json)
@@ -87,21 +84,23 @@ export function Upcoming({ route, navigation }) {
                         .catch((error) => console.error(error))
                         .finally(() => setLoading(false));
 
-                        axios
-                        .post("http://10.0.2.2:80/backend/upcoming_app.php", Data)
+                      axios
+                        .post(
+                          "http://10.0.2.2:80/backend/upcoming_app.php",
+                          Data
+                        )
                         .then((response) => response.data)
                         .then((json) => setUsers(json))
                         .catch((error) => console.error(error))
                         .finally(() => setLoading(false));
-                   
-                  }}
+                    }}
                   >
-                    <Text>cancel</Text>
+                    <Text style={{ color: "white" }}>cancel</Text>
                   </TouchableOpacity>
                 </View>
               </View>
             </View>
-          </TouchableOpacity>
+          </View>
         )}
       />
     </View>
@@ -341,6 +340,12 @@ const styles = StyleSheet.create({
   },
   feedback: {
     paddingTop: 10,
+  },
+  btn: {
+    backgroundColor: COLORS.Main,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 4,
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -12,6 +12,8 @@ import Paginator from "../Components/Paginator";
 import NextButton from "../Components/NextButton";
 import { COLORS } from "../assets/constants";
 import HistoryPatientItem from "../Components/HistoryPatientItem";
+import { RoutingData } from "../Components/Context/RoutingDataProvider";
+import axios from "axios";
 
 export default PatientHistory = ({ navigation }) => {
   const History = [
@@ -43,6 +45,11 @@ export default PatientHistory = ({ navigation }) => {
     },
   ];
 
+  const [data, setData] = useState([]);
+  const [id, setId] = useState();
+
+  const [answers, setAnswers] = useState([]);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
@@ -50,15 +57,37 @@ export default PatientHistory = ({ navigation }) => {
     setCurrentIndex(viewableItems[0].index);
   }).current;
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+  const dataSignIn = useContext(RoutingData);
 
   const scrollTo = () => {
     console.log(currentIndex);
     console.log(History.length);
     if (currentIndex < History.length - 1) {
       slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
+      saveData(data,id)
     } else {
       navigation.navigate("home");
     }
+  };
+
+  const saveData = (data,id) => {
+    var Data = {
+      value:data,
+      p_id:dataSignIn.userId,
+      q_id:id,
+    }
+
+    axios
+    .post("http://10.0.2.2:80/backend/doctor/add_value.php", Data)
+    .then((response) => response.data)
+    .then((json) =>{ 
+      console.log(json)
+    }
+    )
+    .catch((error) => console.error(error))
+    .finally(() => setLoading(false));
+    
+    console.log(id);
   };
 
   return (
@@ -72,7 +101,7 @@ export default PatientHistory = ({ navigation }) => {
             <FlatList
               data={History}
               renderItem={({ item }) => (
-                <HistoryPatientItem item={item} navigation={navigation} />
+                <HistoryPatientItem item={item} navigation={navigation} setData={setData} setId={setId}/>
               )}
               horizontal
               showsHorizontalScrollIndicator

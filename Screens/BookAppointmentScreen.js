@@ -119,10 +119,13 @@ const BookAppointmentScreen = ({ navigation, route }) => {
         </View>
         <TouchableOpacity
           onPress={() => {
+            if (chosen.time == "") {
+              alert("choose appointment pleas");
+            } else {
             navigation.navigate("Payment", {
               appId: selectedAppointment.id,
               doctorId: route.params.doctorId,
-            });
+            });}
           }}
           style={styles.nextbtn}
           activeOpacity={0.6}

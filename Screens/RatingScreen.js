@@ -128,26 +128,25 @@ function StarRating({ navigation, route }) {
                     //  setError(json);
                     if (json == "Complete") {
                       alert("thanks for your feedback");
+                      navigation.navigate('Appointment')
                       //goback to past appointments
                     } else {
                       alert(json);
+                      navigation.navigate('Appointment')
                     }
                   })
                   .catch((error) => console.error(error))
                   .finally(() => setLoading(false));
 
-
-                  axios
+                axios
                   .post("http://10.0.2.2:80/backend/doctorrate.php")
                   .then((response) => response.data)
-                  .then((json) => {
-                  
-                  })
+                  .then((json) => {})
                   .catch((error) => console.error(error))
                   .finally(() => setLoading(false));
 
                 console.log(signUpWith);
-                navigation.replace("Home")
+                navigation.replace("Home");
               }}
             >
               <Text style={styles.buttonTextStyle}>SEND FEEDBACK</Text>
@@ -290,6 +289,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     marginTop: 30,
+    marginBottom: 30,
     padding: 15,
     backgroundColor: "#7BC89C",
   },

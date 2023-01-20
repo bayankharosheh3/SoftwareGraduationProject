@@ -43,12 +43,18 @@ const Visa = ({ fun, setMove, navigation, route }) => {
             style={styles.logoutBtn}
             onPress={() => {
               console.log(visa);
-              setMove(true);
-              navigation.navigate("BookingSuccess", {
-                payment: "visa",
-                appId: route.params.appId,
-                doctorId: route.params.doctorId,
-              });
+
+              if (visa.ID === "11820453" && visa.Password === "1234") {
+                setMove(true);
+                navigation.navigate("BookingSuccess", {
+                  payment: 1,
+                  appId: route.params.appId,
+                  doctorId: route.params.doctorId,
+                });
+              }
+              else{
+                alert('enter valid values, please')
+              }
             }}
           >
             <Text style={styles.logoutBtnText}>confirm</Text>
@@ -82,7 +88,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#00000070",
     alignItems: "center",
-    paddingTop: 120,
+    paddingTop: 20,
   },
   confirmMassage: {
     backgroundColor: "white",
