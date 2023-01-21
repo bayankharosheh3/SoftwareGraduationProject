@@ -24,7 +24,7 @@ const DoctorNotifications = () => {
 
   const getUsers1 = () => {
     axios
-    .post("http://10.0.2.2:80/backend/doctor/notification.php",Data)
+    .post("http://10.0.2.2:80/backend/doctor/notifications.php",Data)
     .then((response) => response.data)
     .then((json) => {
       setUsers(json);
@@ -50,7 +50,7 @@ const DoctorNotifications = () => {
               <View style={styles.Container}>
                 <Text style={styles.notificationTitle}>canceled appointment</Text>
                 <Text style={styles.notificationDesc}>
-                your appointment at {item.time} on {item.date} with doctor {item.name} had been canceled.
+                your appointment at {item.time} on {item.date} had been canceled.
                  </Text>
               </View>
             </View>

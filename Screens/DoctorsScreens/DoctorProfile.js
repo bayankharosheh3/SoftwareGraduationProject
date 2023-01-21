@@ -12,7 +12,8 @@ import messages from "../../assets/data/DProfiledata";
 import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { RoutingData } from "../../Components/Context/RoutingDataProvider";
-import axios from "axios";import DChangePassword from "../../Components/DoctorComponents/DChangePassword";
+import axios from "axios";
+import DChangePassword from "../../Components/DoctorComponents/DChangePassword";
 import DBill from "../../Components/DoctorComponents/DBill";
 
 const DoctorProfile = ({ route, navigation }) => {
@@ -23,11 +24,9 @@ const DoctorProfile = ({ route, navigation }) => {
   const [doctor, setDoctor] = useState([]);
   const [isLoading, setLoading] = useState(false);
   console.log(dataSignIn.userId);
-  
 
   var Data = {
     id: dataSignIn.userId,
-   
   };
   const getDoctor = () => {
     axios
@@ -68,13 +67,13 @@ const DoctorProfile = ({ route, navigation }) => {
           <View style={styles.infoContainer}>
             <View style={styles.imgView}>
               <Image
-               source={{ uri: doctor.image }}
+                source={{ uri: doctor.image }}
                 style={styles.imgProfile}
               ></Image>
             </View>
             <View style={styles.profileText}>
               <Text style={styles.userName}>Dr.{doctor.name}</Text>
-              <Text style={styles.age}>{doctor.specialty}Anesthesiologist</Text>
+              <Text style={styles.age}>{doctor.speciality}</Text>
             </View>
           </View>
         </View>

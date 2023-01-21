@@ -83,7 +83,7 @@ const List = ({ searchPhrase, setCLicked, data, navigation }) => {
                   </View>
                 </View>
                 <View style={styles.userInfoText}>
-                  <Text style={styles.specialty}>{item.specialty}</Text>
+                  <Text style={styles.specialty}>{item.clinic_speciality}</Text>
                   <TouchableOpacity
                     style={styles.chatimg}
                     onPress={() =>
