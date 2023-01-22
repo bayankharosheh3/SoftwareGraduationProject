@@ -16,6 +16,7 @@ import Bill from "./Screens/Payment";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import WebView from "react-native-webview";
 const firebaseConfig = {
  apiKey: "AIzaSyA0qW0ofjQrESKFl42SGSGuYanbZYUE_3M",
 authDomain: "test-936cb.firebaseapp.com",

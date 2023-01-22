@@ -18,6 +18,7 @@ import ClinicsStack from "./ClinicsStack";
 import DoctorsStack from "./DoctorsStack";
 import DTabNav from "./DTabNav";
 import DoctorPatientHistory from "../Screens/DoctorsScreens/DoctorPatientHistory";
+import DoctorLabFile from "../Screens/DoctorsScreens/DoctorLabFile";
 
 const Stack = createStackNavigator();
 const DoctorRoute = () => {
@@ -86,6 +87,11 @@ const DoctorRoute = () => {
       <Stack.Screen
         name="Lab Result"
         component={DoctorLabResult}
+        // options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        name="Lab File"
+        component={DoctorLabFile}
         // options={{ headerShown: false }}
       />
       <Stack.Screen

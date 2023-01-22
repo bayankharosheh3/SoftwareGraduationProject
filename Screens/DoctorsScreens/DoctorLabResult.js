@@ -1,16 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { COLORS } from "../../assets/constants";
 import axios from "axios";
+import WebView from "react-native-webview";
 const DoctorLabResult = ({ navigation, route }) => {
   console.log(route.params.id);
   const [isLoading, setLoading] = useState(false);
   const [doctor, setDoctor] = useState([]);
   var Data = {
-    id:route.params.id,
-   
+    id: route.params.id,
   };
   const getPatient = () => {
     axios
@@ -28,13 +28,21 @@ const DoctorLabResult = ({ navigation, route }) => {
     getPatient();
   }, []);
 
-
   return (
     <View style={styles.mainContainer}>
       <View style={styles.firstRow}></View>
       <View style={styles.secondRow}></View>
       <View style={styles.column}>
-        <View style={styles.resultCont}>{/* result img*/}</View>
+        <View style={styles.resultCont}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              navigation.navigate("Lab File", { link: "bayan" });
+            }}
+          >
+            <Text style={{ color: "white" }}>Display The File</Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.info}>
           <View style={styles.row1}>
             <View style={styles.row2}>
@@ -51,9 +59,7 @@ const DoctorLabResult = ({ navigation, route }) => {
               <Text style={styles.title}>Patient Name:</Text>
               <Text style={styles.title2}>{doctor.name}</Text>
             </View>
-            <View style={styles.row2}>
-            
-            </View>
+            <View style={styles.row2}></View>
           </View>
         </View>
         <View style={styles.info}>
@@ -77,6 +83,12 @@ const styles = StyleSheet.create({
     position: "relative",
     // justifyContent: "center",
     alignItems: "center",
+  },
+  btn: {
+    backgroundColor: COLORS.Main,
+    borderRadius: 7,
+    padding: 20,
+    paddingVertical: 14,
   },
   firstRow: {
     width: "100%",
