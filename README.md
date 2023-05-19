@@ -1,4 +1,5 @@
 # Clinic App
+This repository contains the frontend part of the mobile app for my software graduation project, developed using React Native.
 
 
 ## Project Description:
