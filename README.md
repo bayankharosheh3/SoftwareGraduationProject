@@ -25,7 +25,15 @@ Lab test sending,
 
 https://drive.google.com/drive/folders/1UeFfxHoFYScAFKwFIhZA9LRLxQO_yf3N?usp=sharing
 
-## technologies
-including JavaScript, ES6+, React Native, APIs, React Hooks, React Context, Navigation.
+## Technologies
+The project utilizes the following technologies:
+
+JavaScript
+ES6+
+React Native Expo
+APIs
+React Hooks
+React Context
+Navigation
 
 
